@@ -1,7 +1,16 @@
 {
     "name": "sequelize-events",
     "version": "0.0.3",
+    "description": "An events package for Sequelize",
+    "author": {
+        "name": "pyrotechniac"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PyroTechniac/sequelize-events"
+    },
     "dependencies": {
-        "sequelize": "^4.42.0"
+        "sequelize": "^4.42.0",
+        "sqlite": "^3.0.0"
     }
 }
