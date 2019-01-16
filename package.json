@@ -5,12 +5,21 @@
     "author": {
         "name": "pyrotechniac"
     },
+    "main": "./test/test.js",
+    "scripts": {
+        "start": "node ./src/index.js",
+        "test": "node ./test/test.js",
+        "lint": "eslint . --ext .js --fix",
+        "debug": "eslint . --ext .js"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/PyroTechniac/sequelize-events"
     },
     "dependencies": {
-        "sequelize": "^4.42.0",
-        "sqlite": "^3.0.0"
+        "sequelize": "^4.42.0"
+    },
+    "devDependencies": {
+        "sqlite":"^3.0.0"
     }
 }
