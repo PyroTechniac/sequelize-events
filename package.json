@@ -11,7 +11,7 @@
         "test": "node ./test/test.js",
         "lint": "eslint . --ext .js --fix",
         "debug": "eslint . --ext .js",
-        "git": "git.bat"
+        "git": "github.bat"
     },
     "repository": {
         "type": "git",
