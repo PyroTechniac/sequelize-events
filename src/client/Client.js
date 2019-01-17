@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const { Events } = require('../../util/Constants');
 const { EventEmitter } = require('events');
+const EventManager = require('../events/EventManager');
 /**
  * @extends {EventEmitter}
  */
@@ -11,6 +12,7 @@ class SequelizeClient extends EventEmitter {
     constructor(database) {
         super();
         this.database = database;
+        this.events = new EventManager(this, database);
     }
     async sync(database = this.database) {
         await database.sync();

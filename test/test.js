@@ -4,9 +4,6 @@ const { test, db } = require('./database');
 const client = new Client(db);
 client.authenticate();
 client.sync();
-db.addHook('afterCreate', 'testEvent', (instance, options) => {
-    client.emit('afterCreate', (instance, options));
-});
 test.create({
     test: 'Testing things 2',
 });
