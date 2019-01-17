@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { Events } = require('../../util/Constants');
 const { EventEmitter } = require('events');
 /**
  * @extends {EventEmitter}
