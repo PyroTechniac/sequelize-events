@@ -24,8 +24,7 @@ class EventManager {
     }
     register(Event) {
         const hookName = Event.name.replace(/Event$/, '');
-        this[Event.name.replace(/Event$/, '')] = new Event(this.client, this.database);
-        this.database.addHook(`${hookName}`, `${Event.name}`, (data) => this.client.emit(`${hookName}`, (data)));
+        this[Event.name.replace(/Event$/, '')] = new Event(this.client, this.database, hookName);
     }
 }
 module.exports = EventManager;

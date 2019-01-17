@@ -7,13 +7,24 @@ const EventManager = require('../events/EventManager');
 class SequelizeClient extends EventEmitter {
     /**
      * @param {SequelizeDatabase} database - Database for the client
+     * @param {Object} options - Options for the client
      */
     constructor(database) {
         super();
         this.database = database;
-        database.authenticate().catch(error => console.error('[AUTHENTICATING] The client had an error authenticating with the database\n', error));
-        database.sync().catch(error => console.error('[SYNCING] The client has an error syncing the database\n', error));
+        database.authenticate().catch(error => {
+            throw new Error(`AuthError: ${error}`);
+        });
         this.events = new EventManager(this, database);
+    }
+    async _validateOptions(options = this.options) {
+        if (!(typeof options === 'object' || typeof options === 'undefined')) {
+            throw new TypeError('Client options must be an object');
+        }
+        if (!(typeof options.force === 'boolean' || typeof options.force === 'undefined')) {
+            throw new TypeError('Force must be boolean');
+        }
+        return options;
     }
 }
 module.exports = SequelizeClient;
