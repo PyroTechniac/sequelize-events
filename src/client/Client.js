@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const { Events } = require('../../util/Constants');
 const { EventEmitter } = require('events');
 const EventManager = require('../events/EventManager');
 /**
@@ -7,26 +6,14 @@ const EventManager = require('../events/EventManager');
  */
 class SequelizeClient extends EventEmitter {
     /**
-     * @param {SQLDatabase} database - Database for the client
+     * @param {SequelizeDatabase} database - Database for the client
      */
     constructor(database) {
         super();
         this.database = database;
+        database.authenticate().catch(error => console.error('[AUTHENTICATING] The client had an error authenticating with the database'));
+        database.sync().catch(error => console.error('[SYNCING] The client has an error syncing the database', error));
         this.events = new EventManager(this, database);
-    }
-    async sync(database = this.database) {
-        await database.sync();
-        return database;
-    }
-    async authenticate(database = this.database) {
-        await database.authenticate();
-        return database;
-    }
-    /**
-     * @param {String} name The name of the model
-     */
-    async define(name, options) {
-        console.log(options);
     }
 }
 module.exports = SequelizeClient;
