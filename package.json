@@ -1,6 +1,6 @@
 {
     "name": "sequelize-events",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "An events package for Sequelize",
     "author": {
         "name": "pyrotechniac"
@@ -20,6 +20,6 @@
         "sequelize": "^4.42.0"
     },
     "devDependencies": {
-        "sqlite":"^3.0.0"
+        "sqlite": "^3.0.0"
     }
 }
