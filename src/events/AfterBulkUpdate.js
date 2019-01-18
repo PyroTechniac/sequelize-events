@@ -1,6 +1,6 @@
 const Event = require('./Event');
 class afterBulkUpdateEvent extends Event {
-    handle(data) {
+    handle(options) {
         // This is just filler
     }
 }

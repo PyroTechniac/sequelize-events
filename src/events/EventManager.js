@@ -24,7 +24,7 @@ class EventManager {
     }
     register(Event) {
         const hookName = Event.name.replace(/Event$/, '');
-        this[Event.name.replace(/Event$/, '')] = new Event(this.client, this.database, hookName);
+        this[hookName] = new Event(this.client, this.database, hookName);
     }
 }
 module.exports = EventManager;

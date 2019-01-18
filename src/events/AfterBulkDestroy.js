@@ -1,6 +1,6 @@
 const Event = require('./Event');
 class afterBulkDestroyEvent extends Event {
-    handle(data) {
+    handle(options) {
         // This is just filler
     }
 }

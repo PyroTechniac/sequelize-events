@@ -1,6 +1,6 @@
 const Event = require('./Event');
 class validationFailedEvent extends Event {
-    handle(data) {
+    handle(instance, options, error) {
         // This is just filler
     }
 }

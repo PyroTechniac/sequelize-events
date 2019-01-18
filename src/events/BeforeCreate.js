@@ -1,6 +1,6 @@
 const Event = require('./Event');
 class beforeCreateEvent extends Event {
-    handle(data) {
+    handle(instance, options) {
         // This is just filler
     }
 }

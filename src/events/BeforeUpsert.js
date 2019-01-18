@@ -1,6 +1,6 @@
 const Event = require('./Event');
 class beforeUpsertEvent extends Event {
-    handle(data) {
+    handle(values, options) {
         // This is just filler
     }
 }

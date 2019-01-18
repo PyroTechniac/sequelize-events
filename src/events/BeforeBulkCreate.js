@@ -1,6 +1,6 @@
 const Event = require('./Event');
 class beforeBulkCreateEvent extends Event {
-    handle(data) {
+    handle(instances, options) {
         // This is just filler
     }
 }
