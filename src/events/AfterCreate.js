@@ -1,7 +1,7 @@
 const Event = require('./Event');
 class afterCreateEvent extends Event {
     handle(instance, options) {
-        // This is just filler
+        this.client.emit('afterCreate', (instance, options));
     }
 }
 module.exports = afterCreateEvent;
