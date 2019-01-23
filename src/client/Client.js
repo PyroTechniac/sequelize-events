@@ -15,6 +15,9 @@ class SequelizeClient extends EventEmitter {
         database.authenticate().catch(error => {
             throw new Error(`AuthError: ${error}`);
         });
+        database.sync().catch(error => {
+            throw new Error(`SyncError: ${error}`);
+        });
         this.events = new EventManager(this, database);
     }
     async _validateOptions(options = this.options) {
