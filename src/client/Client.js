@@ -20,14 +20,5 @@ class SequelizeClient extends EventEmitter {
         });
         this.events = new EventManager(this, database);
     }
-    async _validateOptions(options = this.options) {
-        if (!(typeof options === 'object' || typeof options === 'undefined')) {
-            throw new TypeError('Client options must be an object');
-        }
-        if (!(typeof options.force === 'boolean' || typeof options.force === 'undefined')) {
-            throw new TypeError('Force must be boolean');
-        }
-        return options;
-    }
 }
 module.exports = SequelizeClient;
