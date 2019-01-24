@@ -12,12 +12,6 @@ class SequelizeClient extends EventEmitter {
     constructor(database) {
         super();
         this.database = database;
-        database.authenticate().catch(error => {
-            throw new Error(`AuthError: ${error}`);
-        });
-        database.sync().catch(error => {
-            throw new Error(`SyncError: ${error}`);
-        });
         this.events = new EventManager(this, database);
     }
 }

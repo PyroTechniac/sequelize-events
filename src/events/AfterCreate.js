@@ -1,7 +1,7 @@
 const Event = require('./Event');
 class afterCreateEvent extends Event {
-    handle(database, instance, options) {
-        this.client.emit('afterCreate', (database, instance, options));
+    handle(instance, options) {
+        this.client.emit('afterCreate', instance.dataValues, options);
     }
 }
 module.exports = afterCreateEvent;
