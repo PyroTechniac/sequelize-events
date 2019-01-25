@@ -3,10 +3,12 @@ const { EventEmitter } = require('events');
 const EventManager = require('../events/EventManager');
 /**
  * @extends {EventEmitter}
+ * @typedef {Sequelize} SequelizeDatabase
  */
 class SequelizeClient extends EventEmitter {
     /**
      * @constructor
+     * @type {SequelizeDatabase}
      * @param {SequelizeDatabase} database - Database for the client
      */
     constructor(database) {
@@ -16,13 +18,14 @@ class SequelizeClient extends EventEmitter {
     }
     /**
      * @param {Object} [options] - options for syncing
-     * @returns {Promise<SequelizeDatabase>}
+     * @type {Object}
+     * @returns {Promise<SequelizeClient>}
      */
     async sync(options) {
         await this._validateSyncOptions(options);
     }
     /**
-     * @param {object}
+     * @param {object} options
      * @private
      */
     _validateSyncOptions(options) {
