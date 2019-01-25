@@ -11,10 +11,6 @@ class SequelizeClient extends EventEmitter {
      */
     constructor(database) {
         super();
-        /**
-         * @type {SequelizeDatabase}
-         * @type {EventManager}
-         */
         this.database = database;
         this.events = new EventManager(this, database);
     }
