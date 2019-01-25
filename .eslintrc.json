@@ -22,6 +22,7 @@
         "dot-location": ["error", "property"],
         "handle-callback-err": "off",
         "indent": "error",
+        "keyword-spacing": ["error", {"before": true, "after": true}],
         "max-nested-callbacks": ["error", { "max": 4 }],
         "max-statements-per-line": ["error", { "max": 2 }],
         "no-console": "off",

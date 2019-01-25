@@ -5,6 +5,7 @@
     "author": {
         "name": "pyrotechniac"
     },
+    "types": "./typings/index.d.ts",
     "main": "./src/index.js",
     "scripts": {
         "test": "node ./test/test.js",
@@ -20,6 +21,7 @@
         "sequelize": "^4.42.0"
     },
     "devDependencies": {
+        "@types/node": "^10.12.18",
         "sqlite": "^3.0.0"
     }
 }
