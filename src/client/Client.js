@@ -17,15 +17,16 @@ class SequelizeClient extends EventEmitter {
         this.events = new EventManager(this, database);
     }
     /**
-     * @param {Object} [options] - options for syncing
+     * @param {Object} options - options for syncing
      * @type {Object}
-     * @returns {Promise<SequelizeClient>}
+     * @returns {Promise<SequelizeDatabase>}
      */
     async sync(options) {
         await this._validateSyncOptions(options);
     }
     /**
-     * @param {object} options
+     * @type {Function}
+     * @param {Object} options
      * @private
      */
     _validateSyncOptions(options) {
