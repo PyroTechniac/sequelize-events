@@ -3,6 +3,7 @@ declare module 'sequelize-events' {
     import { EventEmitter } from 'events'
     export class SequelizeClient extends EventEmitter {
         constructor(database: SequelizeDatabase)
+        private static _validateSyncOptions(options: SyncOptions): void
     }
 
 
