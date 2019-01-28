@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const { EventEmitter } = require('events');
 const EventManager = require('../events/EventManager');
+const AuthError = require('../errors/AuthError');
+const SyncError = require('../errors/SyncError');
 /**
  * @extends {EventEmitter}
  * @typedef {Sequelize} SequelizeDatabase
@@ -23,7 +25,7 @@ class SequelizeClient extends EventEmitter {
      * @returns {Promise<SequelizeDatabase>}
      */
     async sync(options) {
-        await this._validateSyncOptions(options);
+        const ops = await this._validateSyncOptions(options);
     }
     /**
      * @type {Object}
@@ -31,12 +33,35 @@ class SequelizeClient extends EventEmitter {
      * @private
      */
     _validateSyncOptions(options) {
-        if (typeof options !== 'undefined' && typeof options !== 'object') {
-            throw new TypeError('sync options must be an object or undefined');
+        if (options === undefined) return;
+        if (typeof options !== 'object' || options instanceof Array) {
+            throw new SyncError('Sync options must be an object');
         }
-        const isArr = options instanceof Array;
-        if (isArr === true) throw new TypeError('sync options must be an object or undefined');
-        if (typeof options === 'undefined') return;
+        if (typeof options.force !== 'boolean' && typeof options.force !== 'undefined') {
+            throw new SyncError('Force must be boolean');
+        }
+        if (!(options.match instanceof RegExp) && typeof options.match !== 'undefined') {
+            throw new SyncError('Match must be a RegExp');
+        }
+        if (typeof options.logging !== 'function' && typeof options.logging !== 'boolean' && typeof options.logging !== 'undefined') {
+            throw new SyncError('Logging must be a function or boolean');
+        }
+        if (typeof options.schema !== 'string' && typeof options.schema !== 'undefined') {
+            throw new SyncError('Schema must be a string');
+        }
+        if (typeof options.searchPath !== 'string' && typeof options.schema !== 'undefined') {
+            throw new SyncError('Search Path must be a string');
+        }
+        if (typeof options.hooks !== 'undefined') {
+            throw new SyncError('Hooks cannot be modified');
+        }
+        if (typeof options.alter !== 'boolean' && typeof options.alter !== 'undefined') {
+            throw new SyncError('Alter must be boolean');
+        }
+        if (options.force === undefined) {
+            options.force = false;
+        }
+        return options;
     }
 }
 module.exports = SequelizeClient;
