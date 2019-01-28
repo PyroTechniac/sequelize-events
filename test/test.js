@@ -9,6 +9,7 @@ const db = new Sequelize('database', 'username', 'password', {
     host: 'localhost'
 });
 const client = new Client(db);
+client.sync();
 const test = db.define('test', {
     ranNum: Sequelize.INTEGER
 });

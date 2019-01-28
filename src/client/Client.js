@@ -4,6 +4,7 @@ const EventManager = require('../events/EventManager');
 /**
  * @extends {EventEmitter}
  * @typedef {Sequelize} SequelizeDatabase
+ * @typedef {Object} Object
  */
 class SequelizeClient extends EventEmitter {
     /**
@@ -25,12 +26,11 @@ class SequelizeClient extends EventEmitter {
         await this._validateSyncOptions(options);
     }
     /**
-     * @type {Function}
+     * @type {Object}
      * @param {Object} options
      * @private
      */
     _validateSyncOptions(options) {
-        console.log(typeof options);
         if (typeof options !== 'undefined' && typeof options !== 'object') {
             throw new TypeError('sync options must be an object or undefined');
         }
