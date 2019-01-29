@@ -6,7 +6,7 @@ const SyncError = require('../errors/SyncError');
 /**
  * @extends {EventEmitter}
  * @typedef {Sequelize} SequelizeDatabase
- * @typedef {Object} Object
+ * @typedef {object} Object
  */
 class SequelizeClient extends EventEmitter {
     /**
@@ -20,12 +20,37 @@ class SequelizeClient extends EventEmitter {
         this.events = new EventManager(this, database);
     }
     /**
-     * @param {Object} options - options for syncing
-     * @type {Object}
+     * @param {object} options - options for syncing
+     * @type {object}
      * @returns {Promise<SequelizeDatabase>}
      */
     async sync(options) {
         const ops = await this._validateSyncOptions(options);
+        try {
+            this.database.sync(ops);
+        }
+        catch (error) {
+            throw new SyncError(error.message);
+        }
+        return this.database;
+    }
+    async authenticate() {
+        try {
+            this.database.authenticate();
+        }
+        catch (error) {
+            throw new AuthError(error.message);
+        }
+        return this.database;
+    }
+    /**
+     * 
+     * @param {String} modelName The name of the model. The model will be stored in the client.models collection
+     * @param {object} attriutes The columns of the table
+     * @param {object} options These options are merged with the default define
+     */
+    async define(modelName, attriutes, options) {
+        console.log(modelName);
     }
     /**
      * @type {Object}
@@ -33,7 +58,7 @@ class SequelizeClient extends EventEmitter {
      * @private
      */
     _validateSyncOptions(options) {
-        if (options === undefined) return;
+        if (options === undefined) return {};
         if (typeof options !== 'object' || options instanceof Array) {
             throw new SyncError('Sync options must be an object');
         }
@@ -57,9 +82,6 @@ class SequelizeClient extends EventEmitter {
         }
         if (typeof options.alter !== 'boolean' && typeof options.alter !== 'undefined') {
             throw new SyncError('Alter must be boolean');
-        }
-        if (options.force === undefined) {
-            options.force = false;
         }
         return options;
     }
